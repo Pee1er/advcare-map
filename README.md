@@ -34,7 +34,4 @@ Everyone (WD) has access mask 0x1201bf, which includes FILE_READ_DATA and FILE_W
 Map result:
 On 2026-11-01 the administrator held physical address 0x8773e000 and did not send the IOCTL. aida-low sent IOCTL 0x9C402850 for that address with length one byte. Through the mapping, that account wrote 0x5A and read 0x5A back through IOCTL 0x9C40284C, then wrote 0xA5 and read 0xA5 back the same way. The administrator read the first byte of the same physical page and saw 0x5A, then 0xA5. This run confirms that a Users account can modify another process's physical page. The test did not show a crash.
 
-Other reports:
-CVE-2025-14252 describes Advantech SUSI driver susi.sys (FileVersion up to 5.0.24335). It does not describe this AdvCare.sys image or IOCTL 0x9C402850. This note identifies the tested file by the hashes above.
-
 Suggested fix: on IOCTL 0x9C402850, map only a physical address chosen inside the driver, and limit access to \\.\AdvCare to Administrators and SYSTEM.
