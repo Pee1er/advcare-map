@@ -32,6 +32,6 @@ O:BAG:SYD:(A;;0x1201bf;;;WD)(A;;FA;;;SY)(A;;FA;;;BA)(A;;0x1200a9;;;RC)S:AI(ML;;N
 Everyone (WD) has access mask 0x1201bf, which includes FILE_READ_DATA and FILE_WRITE_DATA. Local account aida-low belongs to Users and is not in Administrators. That account opened \\.\AdvCare. The administrator did not send the IOCTL.
 
 Map result:
-On 2026-11-06, on an isolated Windows 10 virtual machine (build 19044), aida-low opened \\.\AdvCare and sent IOCTL 0x9C402850 and IOCTL 0x9C40284C. Before those calls, whoami for that process was not NT AUTHORITY\SYSTEM. After those calls, whoami was NT AUTHORITY\SYSTEM. The administrator did not send the IOCTL. The test did not show a crash.
+On 2026-11-06, on an isolated Windows 10 virtual machine (build 19044), aida-low opened \\.\AdvCare and sent IOCTL 0x9C402850 and IOCTL 0x9C40284C. Before those calls, whoami in that account's command window was not NT AUTHORITY\SYSTEM. After those calls, a new command window titled NT AUTHORITY\SYSTEM appeared, and whoami in that new window was NT AUTHORITY\SYSTEM. The administrator did not send the IOCTL. The test did not show a crash.
 
 Suggested fix: on IOCTL 0x9C402850, map only a physical address chosen inside the driver, and limit access to \\.\AdvCare to Administrators and SYSTEM.
